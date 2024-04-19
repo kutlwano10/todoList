@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function(){
     const taskListEl = document.querySelector('.taskList');
 
 
-    let taskList = [];
+    let taskList = [];//when object is pushed it stores in here
 
     //FIRSTLY: CREATED BUTTON & INPUT FUNCTIONALITY
     taskButtonEl.addEventListener('click', function() {
@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', function(){
         if(taskInputValue !== '') {
             taskList.push({task: taskInputValue, completed: false});
             
+            addToLocalStorage()
             //when button clicked should Display task on Page
             displayTask()
             
@@ -30,10 +31,10 @@ document.addEventListener('DOMContentLoaded', function(){
         const newTask = document.createElement('li');
 
         // taskListEl.textContent = " ";
-        for(let i = 0; i < taskList.length; i++) {
+        for(let i = 0 ; i < taskList.length; i++) {
             
-            //
-            newTask.innerHTML = taskList[i].task
+            //I test first by displaying a single task from taskList
+            newTask.innerHTML = taskList[i].task//1 by 1 its what [i] means(from 0 until the length of the array)
         }
         //Append the created li element to tastList Element ID
         taskListEl.appendChild(newTask);
@@ -47,10 +48,9 @@ document.addEventListener('DOMContentLoaded', function(){
     //     taskList = JSON.parse(localStorageSavedTask)
     // }
 
-    //THIRDLY CREATE A FUNCTION TO ADD TO LOCAL STORAGE 
-    // function addToLocalStorage() {
-            //Here we create a Local Storage to store taskLists 
-    //     localStorage.setItem("tasks", JSON.stringify(taskList))// Tasks is like our file where we will store the taskList strings
-    // }
+    //THIRDLY CREATE A FUNCTION TO ADD TO LOCAL STORAGE The TASKLIST
+    function addToLocalStorage() {
+        localStorage.setItem('Tasks', JSON.stringify(taskList))
+    }
 
 })
