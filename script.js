@@ -14,16 +14,19 @@ document.addEventListener('DOMContentLoaded', function(){
         if(taskInputValue !== '') {
             taskList.push({task: taskInputValue, completed: false});
             
-            addToLocalStorage()
+            addToLocalStorage(taskList)
             //when button clicked should Display task on Page
             displayTask()
-            
-            
             // console.log(taskList)
-            
         }
+        clearInputValue()
+
+        
         
     })
+    function clearInputValue() {
+        inputValueEl.value ="";
+    }
 
     //SECONDLY: CREATE FUNCTION THAT DISPLAYS TASKLIST ON PAGE
 
@@ -35,11 +38,21 @@ document.addEventListener('DOMContentLoaded', function(){
             
             //I test first by displaying a single task from taskList
             newTask.innerHTML = taskList[i].task//1 by 1 its what [i] means(from 0 until the length of the array)
+
+            //This func REMOVES the task item
+            newTask.addEventListener('click', function() {
+                let removetask = taskList[i].task
+                this.remove(removetask)
+            })
         }
+
+        
         //Append the created li element to tastList Element ID
         taskListEl.appendChild(newTask);
+        
 
     }
+    
 
     //4THLY 
     // let localStorageSavedTask = addToLocalStorage();
